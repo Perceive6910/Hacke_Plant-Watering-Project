@@ -1,3 +1,4 @@
+	
 	const int daySeconds =86399;  
 	const int hourSeconds = 3599;
 	const int minuteSeconds = 59;
@@ -32,7 +33,7 @@ String date(int time)
 
 }
 
-int hrs(time){
+int hrs(int time){
 	time = getTime(time);
 
 	
@@ -44,4 +45,17 @@ int hrs(time){
 	time = time / minuteSeconds;
 	seconds = time;
 	return hrs;
+}
+
+int runCycles(int time,int timer,int sec, int pin){
+  int newTime = getTime(time);
+  if(newTime >= timer){
+    digitalWrite(pin, HIGH);
+    delay(sec);
+    digitalWrite(pin, LOW);
+    return 0;
+  }
+  else{
+    return  time;
+  }
 }

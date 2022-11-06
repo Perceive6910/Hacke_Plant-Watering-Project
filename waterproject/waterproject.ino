@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include "time.h"
 
 #define SCREEN_WIDTH 128     // OLED display width, in pixels
 #define SCREEN_HEIGHT 64     // OLED display height, in pixels
@@ -37,8 +38,9 @@ int buttonPressCount = 1;  //number of button presses
 int buttonItem = 0;        //current item button is on
 int lastButtonItem = 0;    //last button item
 bool menuMode;
-
-
+/// store values for cyles of loop
+int waterCycle = 0;
+int fanCycle = 0;
 
 /// menu items
 String lcdMenus[] = {
@@ -130,11 +132,15 @@ void loop() {
     }
   }
 
+/// check if cycles are to happen
+waterCycle = runCycles(waterCycle,3600, pumpTime, pinPump);
+fanCycle = runCycles(fanCycle,1800,fanTime,pinFan);
+  
 
-
-  Serial.println(menuDefault);
-  Serial.println(up);
+ 
   display.display();
+  waterCycle++;
+  fanCycle++;
 }
 
 bool ButtonPress(int pin) {
