@@ -228,7 +228,6 @@ void menuTwo(bool button, int pinFan, int time) {
   }
 }
 void diagnostics() {
-  display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(1, 2);
@@ -236,4 +235,9 @@ void diagnostics() {
   display.setCursor(1, 20);
   display.print("Moisture: ");
   display.println((100-((moisture/100)*100)));
+
+  display.setCursor(1,40);
+  display.println(date(waterCycle));
+  
+
 }
