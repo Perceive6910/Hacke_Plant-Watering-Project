@@ -33,9 +33,16 @@ void setup() {
   pinMode(pinUp, INPUT_PULLUP);
   pinMode(pinMiddle, INPUT_PULLUP);
   pinMode(pinDown, INPUT_PULLUP);
-
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(0,0);
+  display.write("Plant");
+  display.setCursor(3,1);
+  display.write("Watering");
+  display.display();
+  delay(3000);
   menuDefault = 1;
-  
 }
 
 
@@ -62,7 +69,7 @@ menuButtons(menuDefault);
 
 delay(20);
 }
-//displays and swaps menue
+//displays and swaps menu
 
 void menuButtons(int selectedMenu){
   if (selectedMenu == 1)
@@ -115,7 +122,6 @@ void menuButtons(int selectedMenu){
       display.println(moisture);
   }
 }
-
 
 bool ButtonPress(int pin){
   int val = analogRead(pin);
