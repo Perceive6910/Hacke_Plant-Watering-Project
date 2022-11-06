@@ -5,7 +5,7 @@ void menuOne(bool button, int pumpPin) {
       display.setTextSize(1);
       display.setTextColor(SSD1306_WHITE);
       display.setCursor(1,2);
-      display.println("Would you like to")
+      display.println("Would you like to");
       display.setCursor(1,20);
-      display.println("Water the Plant?")
+      display.println("Water the Plant?");
 }
