@@ -52,17 +52,17 @@ void menuButtons(int selectedMenu) {
 
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(display.width() / 2 - 12, 20);
+  display.setCursor(15, 20);
   display.println("Water");
 
-  display.setCursor(display.width() / 2 - 12, 35);
+  display.setCursor(15, 35);
   display.println("Fan");
 
-  display.setCursor(display.width() / 2 - 12, 50);
+  display.setCursor(15, 50);
   display.println("Diagnostics");
 
 
-  int x = display.width() / 2 - 24;
+  int x = 5;
   int y = 0;
   if (selectedMenu == 1) {
     y = 20;
@@ -73,7 +73,7 @@ void menuButtons(int selectedMenu) {
   } else if (selectedMenu == 3) {
     y = 50;
   }
-  drawRect(x, y);
+  drawRect(x, y+2);
 }
 
 template< typename T, size_t NumberOfSize >
@@ -211,7 +211,7 @@ void menuTwo(bool button, int pinFan, int time) {
   display.println("Fan the Plant?");
 
 
-  /// get pump
+  /// get fan
   if (button) {
     digitalWrite(pinFan, HIGH);
     delay(time);
@@ -225,5 +225,6 @@ void diagnostics() {
   display.setCursor(1, 2);
   display.println("diagnostics");
   display.setCursor(1, 20);
-  display.println("Fan the Plant?");
+  display.print("Moisture: ");
+  display.println((100-((moisture/100)*100)));
 }
