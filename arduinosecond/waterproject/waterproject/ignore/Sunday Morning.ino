@@ -12,7 +12,7 @@ void menuOne(bool button, int pumpPin) {
 
 void FanToggle(bool buttonClick, int fanPin){
 int time = 10000
-      if(button){
+      if(buttonClick){
       digitalWrite(fanPin, HIGH);
       delay(time);
       digitalWrite(fanPin, LOW);
