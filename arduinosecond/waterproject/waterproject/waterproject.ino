@@ -17,7 +17,9 @@ const int pinMiddle = A6;
 const int pinFan = 2;
 const int pinPump = 3;
 
-const int runTime = 4000;
+const int fanTime = 4000;
+cosnt int pumpTime = 4000;
+
 
 
 int moisture = 0;
@@ -92,6 +94,7 @@ void setup() {
   }
   //pinMode(pinUp, INPUT_PULLUP);
   // pinMode(pinMiddle, INPUT_PULLUP);
+  pinMode(pinPump, OUTPUT);
   pinMode(pinFan, OUTPUT);
   display.clearDisplay();
   display.setTextSize(1);
@@ -170,11 +173,11 @@ void drawRect(int x, int y) {
 
 void menuSelect(int selectedMenu) {
   if (selectedMenu == 1) {
-    menuOne(middle, pinPump, runTime);
+    menuOne(middle, pinPump, pumpTime);
   }
 
   else if (selectedMenu == 2) {
-    menuTwo(middle, pinFan, runTime);
+    menuTwo(middle, pinFan, fanTime);
   } else if (selectedMenu == 3) {
     diagnostics();
   }
