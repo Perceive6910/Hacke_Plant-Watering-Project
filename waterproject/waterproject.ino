@@ -18,7 +18,7 @@ const int pinFan = 2;
 const int pinPump = 3;
 
 const int fanTime = 4000;
-cosnt int pumpTime = 4000;
+const int pumpTime = 4000;
 
 
 
