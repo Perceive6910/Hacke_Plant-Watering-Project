@@ -1,6 +1,7 @@
 
 
 String date(int time){
+	time = time/50;
 
 	const int daySeconds =86400;  
 	const int hourSeconds = 3600;
