@@ -6,7 +6,7 @@ Building Parts:
 	Controls fan, moisture detector, and water pump.
 1x Water Pump
 	Pumps water based on the moisture level of the soil.
-1x Small makeshift Fan - Change Name
+1x Small makeshift Fan
 	Promotes structural integrity of the plant
 1x Arduino Moisture Sensor
 	Detects the change in voltage of the soil. 
