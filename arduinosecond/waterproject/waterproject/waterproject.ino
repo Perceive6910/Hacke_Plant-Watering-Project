@@ -17,12 +17,54 @@ const int pinMiddle = A3;
 int moisture = 0;
 int dryValue = 256;
 int wetValue = 870;
+int menuSize;
+int currentMenu;
+int homeMenu;
+int menuDefault;
+// button variables
+bool up;
+bool down;
+bool middle;
+
+/// setup for the code
+
+
+void setup() {
+  pinMode(pinUp, INPUT_PULLUP);
+  pinMode(pinMiddle, INPUT_PULLUP);
+  pinMode(pinDown, INPUT_PULLUP);
+
+  menuDefault = 1;
+  
+}
+
+
+/// menue items
 String lcdMenus[] = {
   "Plant Status",
   "Clock Cycle",
   "Moisture Value"
 };
-void menuButtons(int selectedMenu, bool buttonUp, bool buttonDown, bool buttonEnterMenus){
+
+
+
+
+void loop() {
+  //idk how buttons are gonna open menus
+  up = ButtonPress(pinUp);
+middle = ButtonPress(pinMiddle);
+down = ButtonPress(pinDown);
+
+/// change how the menue is viewed
+menuDefault = changeMenu(menuDefault,up,down);
+menuButtons(menuDefault);
+
+
+delay(20);
+}
+//displays and swaps menue
+
+void menuButtons(int selectedMenu){
   if (selectedMenu == 1)
   {
     moisture = analogRead(pinMoisture);
@@ -74,19 +116,30 @@ void menuButtons(int selectedMenu, bool buttonUp, bool buttonDown, bool buttonEn
   }
 }
 
-int menuSize;
-int currentMenu;
-int homeMenu;
-void setup() {
-  pinMode(pinUp, INPUT_PULLUP);
-  pinMode(pinMiddle, INPUT_PULLUP);
-  pinMode(pinDown, INPUT_PULLUP);
+
+bool ButtonPress(int pin){
+  int val = analogRead(pin);
+  if (val == 1023){
+    return true;
+  }
+  else{
+    return false;
+  }
 }
 
 
-
-
-void loop() {
-  //idk how buttons are gonna open menus
+int changeMenu(int menuPrev,bool up,bool down){
   
+  if(up){
+    menuPrev++;
+  }
+  else if(down){
+  menuPrev--;
+  }
+  else{
+    return menuPrev;
+  }
+
+  menuPrev = (menuPrev > 3 ? 3 : (menuPrev < 1 ? 3 :menuPrev));
+  return menuPrev;
 }
