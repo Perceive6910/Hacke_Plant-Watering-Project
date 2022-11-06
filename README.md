@@ -1,10 +1,11 @@
-Hacke Watering Project
+
+# Automatic Plant Care Project
 
     Automatic plant watering using Arduino sensors.
 
-Building Parts:
+## Building Parts:
 
-1x Elegoon Nano Board
+ 1x Elegoon Nano Board
 
 	Controls fan, moisture detector, and water pump.
 
@@ -28,8 +29,10 @@ Building Parts:
 	
  	Moisture Sensor.
 
-Accessories: 
-
 1x Solar Panel
 
 	Delivers power to the battery bank.
+
+
+
+
