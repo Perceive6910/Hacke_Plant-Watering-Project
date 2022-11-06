@@ -11,43 +11,28 @@
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-const int pinMoisture = A0;
-const int pinUp = A1;
-const int pinDown = A2;
-const int pinMiddle = A6;
-const int pinFan = 2;
-const int pinPump = 3;
+const int pinMoisture = A0; //pin for moisture sensor
+const int pinUp = A1; //pin for up button
+const int pinDown = A2; //pin for down button
+const int pinMiddle = A6; //pin for middle/enter button
+const int pinFan = 5; //pin for fan motor
+const int pinPump = 3; //pin for water pump
+const int fanTime = 4000; //time fan runs in ms
+const int pumpTime = 4000; //time pump runs in ms
 
-const int fanTime = 4000;
-const int pumpTime = 4000;
-
-
-
-int moisture = 0;
-int dryValue = 256;
-int wetValue = 870;
-int menuSize;
-int currentMenu;
-int homeMenu;
-int menuDefault;
+//moisture sensor variables
+int moisture = 0; //moisture as integer value
+int dryValue = 256; //integer value of moisture when too dry
+int wetValue = 870; //integer value of moisture when too wet
 // button variables
-bool up;
-bool down;
-bool middle;
-int buttonPressCount = 1;  //number of button presses
-int buttonItem = 0;        //current item button is on
-int lastButtonItem = 0;    //last button item
-bool menuMode;
+bool up; //up button bool
+bool down; //down button bool
+bool middle; //middle/enter button bool
+bool menuMode; //bool for going back to main menu
+int menuDefault; //menu to show on boot of board
 /// store values for cyles of loop
-int waterCycle = 0;
-int fanCycle = 0;
-
-/// menu items
-String lcdMenus[] = {
-  "Plant Status",
-  "Clock Cycle",
-  "Moisture Value"
-};
+int waterCycle = 0; //number of water cycles completed as integer
+int fanCycle = 0; //number of fan cycles completed as integer
 
 //displays and swaps menu
 void menuButtons(int selectedMenu) {
@@ -80,12 +65,6 @@ void menuButtons(int selectedMenu) {
   drawRect(x, y+2);
 }
 
-template< typename T, size_t NumberOfSize >
-size_t MenuItemsSize(T (&)[NumberOfSize]) {
-  return NumberOfSize;
-}
-int menuItems = MenuItemsSize(lcdMenus) - 1;
-int currentMenuItem = 0;
 //// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!setup!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void setup() {
   Serial.begin(9600);
@@ -94,8 +73,6 @@ void setup() {
     for (;;)
       ;
   }
-  //pinMode(pinUp, INPUT_PULLUP);
-  // pinMode(pinMiddle, INPUT_PULLUP);
   pinMode(pinPump, OUTPUT);
   pinMode(pinFan, OUTPUT);
   display.clearDisplay();
@@ -117,6 +94,7 @@ void loop() {
   up = ButtonPress(pinUp);
   middle = ButtonPress(pinMiddle);
   down = ButtonPress(pinDown);
+  moisture = analogRead(pinMoisture);
   /// change how the menu is viewed
   if (menuMode) {
     menuDefault = changeMenu(menuDefault, up, down);
@@ -185,7 +163,7 @@ void menuSelect(int selectedMenu) {
   else if (selectedMenu == 2) {
     menuTwo(middle, pinFan, fanTime);
   } else if (selectedMenu == 3) {
-    diagnostics();
+    diagnostics(moisture);
   }
 }
 
@@ -227,17 +205,16 @@ void menuTwo(bool button, int pinFan, int time) {
     digitalWrite(pinFan, LOW);
   }
 }
-void diagnostics() {
+void diagnostics(int moisture) {
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(1, 2);
-  display.println("diagnostics");
+  display.println("Diagnostics");
   display.setCursor(1, 20);
-  display.print("Moisture: ");
-  display.println((100-((moisture/100)*100)));
-
+  display.print("Moisture Percent: ");
+  display.print(100-(moisture*100/1023));
   display.setCursor(1,40);
-  display.println(date(waterCycle));
-  
-
+  display.println("Hrs since water:");
+  display.setCursor(110, 40);
+  display.print(String(hrs(waterCycle)));
 }

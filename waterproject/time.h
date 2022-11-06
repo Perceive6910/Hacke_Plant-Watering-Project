@@ -1,7 +1,7 @@
 	
-	const int daySeconds =86399;  
-	const int hourSeconds = 3599;
-	const int minuteSeconds = 59;
+	const int daySeconds =86399+1;  
+	const int hourSeconds = 3600;
+	const int minuteSeconds = 60;
 	int seconds;
 	int hours;
 	int minutes;
@@ -44,7 +44,7 @@ int hrs(int time){
 	minutes = time / minuteSeconds;
 	time = time / minuteSeconds;
 	seconds = time;
-	return hrs;
+	return hours;
 }
 
 int runCycles(int time,int timer,int sec, int pin){
