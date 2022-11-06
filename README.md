@@ -1,11 +1,11 @@
 
 # Automatic Plant Care Project
 
-    Automatic plant watering using Arduino sensors.
+    Automatic plant care using arduino nano .
 
 ## Building Parts:
 
- 1x Elegoon Nano Board
+ 1x Arduino Nano Board
 
 	Controls fan, moisture detector, and water pump.
 
