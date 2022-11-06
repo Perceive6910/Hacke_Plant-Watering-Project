@@ -177,6 +177,8 @@ void menuOne(bool button, int pinPump, int time) {
   display.println("Would you like to");
   display.setCursor(1, 20);
   display.println("Water the Plant?");
+  display.setCursor(1,45);
+  display.println("Press down or up to  go to main menu");
 
 
   /// get pump
@@ -196,6 +198,8 @@ void menuTwo(bool button, int pinFan, int time) {
   display.println("Would you like to");
   display.setCursor(1, 20);
   display.println("Fan the Plant?");
+  display.setCursor(1,45);
+  display.println("Press down or up to  go to main menu");
 
 
   /// get fan
@@ -211,10 +215,12 @@ void diagnostics(int moisture) {
   display.setCursor(1, 2);
   display.println("Diagnostics");
   display.setCursor(1, 20);
-  display.print("Moisture Percent: ");
-  display.print(100-(moisture*100/1023));
-  display.setCursor(1,40);
-  display.println("Hrs since water:");
-  display.setCursor(110, 40);
+  display.print("Moisture: ");
+  display.print( String( (moisture / 1023.00) * 100 )+"%" );
+  display.setCursor(1,32);
+  display.println("Hrs since water: ");
+  display.setCursor(110, 32);
   display.print(String(hrs(waterCycle)));
+  display.setCursor(1,45);
+  display.println("Press down or up to  go to main menu");
 }
