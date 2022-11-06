@@ -1,7 +1,7 @@
 
 # Automatic Plant Care Project
 
-    Automatic plant care using arduino nano .
+    Automatic plant care using an arduino nano.
 
 ## Building Parts:
 
@@ -25,7 +25,7 @@
 
 1x Power Bank
 
-	Powers the Elegoon Nano Board, water pump, makeshift fan, and 	
+	Powers the Arduino Nano Board, water pump, makeshift fan, and 	
 	
  	Moisture Sensor.
 
