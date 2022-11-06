@@ -6,6 +6,8 @@
 	int minutes;
 	int days;
 	String string;
+  int getTime();
+  String date();
 
 int getTime(int time){
 	return time/50;
@@ -13,7 +15,8 @@ int getTime(int time){
 
 
 
-String date(int time){
+String date(int time)
+{
 	time = getTime(time);
 
 	
